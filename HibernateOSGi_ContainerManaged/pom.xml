@@ -45,7 +45,7 @@
 							org.hibernate.osgitest.entity
 						</Export-Package>
 						<Import-Package>
-						    javax.persistence;version="1.1.0";jpa="2.0",
+						    javax.persistence,
 							javassist.util.proxy,
 							org.apache.felix.gogo.commands,
 							org.apache.felix.service.command,
@@ -54,7 +54,7 @@
 							org.osgi.service.blueprint
 						</Import-Package>
 						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
-						<Bundle-Activator>org.hibernate.osgitest.OsgiTestBundleActivator</Bundle-Activator>
+						<!-- <Bundle-Activator>org.hibernate.osgitest.OsgiTestBundleActivator</Bundle-Activator> -->
 					</instructions>
 				</configuration>
 			</plugin>

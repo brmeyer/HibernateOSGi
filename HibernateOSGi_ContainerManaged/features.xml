@@ -1,34 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features>
 	<feature name="hibernate-core">
-		<!-- Provided by Karaf. For other runtimes, we'll need to start a javax.persistence 
-			bundle explicitly. -->
-		<feature>jndi</feature>
-		<feature>jpa</feature>
-		<feature>transaction</feature>
+        
+        <!-- JTA -->
+        <config name="org.apache.aries.transaction">
+            aries.transaction.recoverable = true
+            aries.transaction.timeout = 600
+            aries.transaction.howl.logFileDir = ${karaf.data}/txlog
+            aries.transaction.howl.maxLogFiles = 2
+            aries.transaction.howl.maxBlocksPerFile = 512
+            aries.transaction.howl.bufferSizeKBytes = 4
+        </config>
+        <bundle start-level="30">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.transaction/org.apache.aries.transaction.blueprint/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.transaction/org.apache.aries.transaction.manager/1.0.1</bundle>
+        
+        <!-- JPA -->
+        <!-- <bundle start-level="30">mvn:org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0-SNAPSHOT</bundle> -->
+        <bundle start-level="30">mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+        <bundle start-level="30">mvn:org.apache.aries/org.apache.aries.util/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.api/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.blueprint.aries/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container.context/1.0.1</bundle>
+        
+	    <!-- JNDI -->
+        <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.api/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.core/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.rmi/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.url/1.0.0</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.legacy.support/1.0.0</bundle>
+        
+        <bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
+		<bundle>mvn:commons-pool/commons-pool/1.5.4</bundle>
+		<bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle>
+		<bundle>mvn:commons-lang/commons-lang/2.6</bundle>
+		<bundle>wrap:mvn:net.sourceforge.serp/serp/1.13.1</bundle>
 
-		<bundle>mvn:org.hsqldb/hsqldb/2.2.9</bundle>
+		<bundle>mvn:com.h2database/h2/1.3.170</bundle>
+		<bundle>blueprint:file:/home/bmeyer2/workspace_hibernate_master/HibernateOSGi/datasource-h2.xml</bundle>
 
 		<bundle>mvn:com.fasterxml/classmate/0.5.4</bundle>
 		<bundle>mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final</bundle>
+		<bundle>mvn:org.jboss.logging/jboss-logging/3.1.0.GA</bundle>
 
-		<!-- These do not natively support OSGi. Might consider <Embed-Dependency>. -->
+		<!-- These do not natively support OSGi, so using 3rd party bundles. -->
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/2.7.7_5</bundle>
 		<bundle>mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA</bundle>
 		<bundle>mvn:org.apache.servicemix.specs/org.apache.servicemix.specs.jsr303-api-1.0.0/2.2.0</bundle>
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/1.8.2_2</bundle>
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5</bundle>
+		
+		<!-- These do not natively support OSGi and are the wrong versions. -->
+		<bundle>mvn:org.jboss/com.springsource.org.jboss.jandex/1.0.3.Final</bundle>
 
 		<!-- Needed by JACC -->
 		<bundle>mvn:javax.servlet/javax.servlet-api/3.0.1</bundle>
+		
+        <bundle>mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2-SNAPSHOT</bundle>
 
 		<bundle>mvn:org.hibernate/hibernate-core/4.2.0-SNAPSHOT</bundle>
-		<bundle>mvn:org.hibernate/hibernate-entitymanager/4.2.0-SNAPSHOT</bundle>
-
-		<bundle>mvn:org.hibernate/HibernateOSGi_ContainerManaged/1.0.0</bundle>
 	</feature>
 
 	<feature name="hibernate-entitymanager">
 		<feature>hibernate-core</feature>
+        <bundle>mvn:org.hibernate/hibernate-entitymanager/4.2.0-SNAPSHOT</bundle>
+	</feature>
+	
+	<feature name="hibernate-test">
+	    <feature>hibernate-entitymanager</feature>
+        <bundle>mvn:org.hibernate/HibernateOSGi_ContainerManaged/1.0.0</bundle>
 	</feature>
 </features>

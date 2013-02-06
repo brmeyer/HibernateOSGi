@@ -31,20 +31,20 @@ import org.hibernate.osgitest.entity.DataPoint;
  */
 public class DataPointServiceImpl implements DataPointService {
 
-	private EntityManager em;
+	private EntityManager entityManager;
 
 	public void add(DataPoint dp) {
-		em.persist( dp );
-		em.flush();
+		entityManager.persist( dp );
+		entityManager.flush();
 	}
 
 	public List<DataPoint> getAll() {
-		return em.createQuery( "select d from DataPoint d", DataPoint.class ).getResultList();
+		return entityManager.createQuery( "select d from DataPoint d", DataPoint.class ).getResultList();
 	}
 
 	public void deleteAll() {
-		em.createQuery( "delete from DataPoint" ).executeUpdate();
-		em.flush();
+		entityManager.createQuery( "delete from DataPoint" ).executeUpdate();
+		entityManager.flush();
 	}
 
 }
