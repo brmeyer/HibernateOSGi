@@ -5,10 +5,11 @@
     <persistence-unit name="HibernateOSGi_ContainerManaged" transaction-type="JTA">
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/h2ds)</jta-data-source>
         
-        <class>org.hibernate.osgitest.entity</class>
+        <class>org.hibernate.osgitest.entity.DataPoint</class>
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         
         <properties>
+            <property name="hibernate.connection.driver_class" value="org.h2.Driver"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
         </properties>

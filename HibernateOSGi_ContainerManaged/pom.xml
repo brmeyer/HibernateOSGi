@@ -8,9 +8,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-			<version>1.0.1.Final</version>
+			<groupId>org.apache.geronimo.specs</groupId>
+			<artifactId>geronimo-jpa_2.0_spec</artifactId>
+			<version>1.1</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.felix</groupId>
@@ -25,7 +25,7 @@
         <dependency>
             <groupId>org.apache.karaf.shell</groupId>
             <artifactId>org.apache.karaf.shell.console</artifactId>
-            <version>2.2.5</version>
+            <version>2.3.0</version>
         </dependency>
 	</dependencies>
 
@@ -45,13 +45,11 @@
 							org.hibernate.osgitest.entity
 						</Export-Package>
 						<Import-Package>
-						    javax.persistence,
-							javassist.util.proxy,
-							org.apache.felix.gogo.commands,
-							org.apache.felix.service.command,
-                            org.hibernate.proxy,
-                            org.osgi.framework,
-							org.osgi.service.blueprint
+						    org.apache.felix.service.command,
+                            org.apache.felix.gogo.commands,
+                            org.apache.karaf.shell.console,
+                            org.apache.karaf.shell.commands,
+                            * 
 						</Import-Package>
 						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
 						<!-- <Bundle-Activator>org.hibernate.osgitest.OsgiTestBundleActivator</Bundle-Activator> -->

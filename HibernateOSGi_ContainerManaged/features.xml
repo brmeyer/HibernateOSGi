@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features>
-	<feature name="hibernate-core">
+	<feature name="hibernate-test">
+	
+	    <feature>karaf-framework</feature>
         
         <!-- JTA -->
         <config name="org.apache.aries.transaction">
@@ -31,6 +33,7 @@
         <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.url/1.0.0</bundle>
         <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.legacy.support/1.0.0</bundle>
         
+        <!-- Taken from Karaf-Tutorial -->
         <bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
 		<bundle>mvn:commons-pool/commons-pool/1.5.4</bundle>
 		<bundle>mvn:commons-dbcp/commons-dbcp/1.4</bundle>
@@ -51,24 +54,25 @@
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.ant/1.8.2_2</bundle>
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.dom4j/1.6.1_5</bundle>
 		
-		<!-- These do not natively support OSGi and are the wrong versions. -->
-		<bundle>mvn:org.jboss/com.springsource.org.jboss.jandex/1.0.3.Final</bundle>
+		<!-- These do not natively support OSGi, so wrap with BND. -->
+		<bundle>wrap:mvn:org.jboss/jandex/1.1.0.Alpha1</bundle>
 
 		<!-- Needed by JACC -->
 		<bundle>mvn:javax.servlet/javax.servlet-api/3.0.1</bundle>
 		
         <bundle>mvn:org.hibernate.common/hibernate-commons-annotations/4.0.2-SNAPSHOT</bundle>
+        <bundle>wrap:mvn:javax.validation/validation-api/1.0.0.GA</bundle>
+        <bundle>mvn:org.hibernate/hibernate-validator/4.2.0.Final</bundle>
+        
+        <!-- TODO: It seems that the persistence unit bundle needs to be started
+        before hibernate-entitymanager.  When EM's BundleActivator is started,
+        the persistence unit is provided even though HibernateOSGi_ContainerManaged
+        hasn't completely started yet.  If that happens, you'll get an "illegal
+        bundle state" exception.  Is there a way for the activator to
+        watch for bundles with PUs before registering the persistence provider? -->
+        <bundle>mvn:org.hibernate/HibernateOSGi_ContainerManaged/1.0.0</bundle>
 
 		<bundle>mvn:org.hibernate/hibernate-core/4.2.0-SNAPSHOT</bundle>
-	</feature>
-
-	<feature name="hibernate-entitymanager">
-		<feature>hibernate-core</feature>
         <bundle>mvn:org.hibernate/hibernate-entitymanager/4.2.0-SNAPSHOT</bundle>
-	</feature>
-	
-	<feature name="hibernate-test">
-	    <feature>hibernate-entitymanager</feature>
-        <bundle>mvn:org.hibernate/HibernateOSGi_ContainerManaged/1.0.0</bundle>
 	</feature>
 </features>
