@@ -20,12 +20,14 @@
  */
 package org.hibernate.osgitest.entity;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
  * @author Brett Meyer
  */
+@Entity
 public class DataPoint {
 	@Id
 	@GeneratedValue
