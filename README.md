@@ -18,10 +18,10 @@ features.xml shows an example list of (somewhat) order-dependent bundles that ne
 blueprint.xml also provides three Karaf Shell commands for use during testing:  "dp:add {name}", "dp:getall", and "dp:deleteall"
 
 To run the example:
-1. $KARAF_HOME/bin/karaf
-2. features:addurl file:/.../HibernateOSGi/HibernateOSGi_ContainerManaged/features.xml
-3. features:install hibernate-test
-4. dp:add foo
-5. dp:getall (should print "{id}, foo")
-6. dp:deleteall
-7. dp:getall (nothing should print)
+1.  $KARAF_HOME/bin/karaf
+2.  features:addurl file:/.../HibernateOSGi/HibernateOSGi_ContainerManaged/features.xml
+3.  features:install hibernate-test
+4.  dp:add foo
+5.  dp:getall (should print "{id}, foo")
+6.  dp:deleteall
+7.  dp:getall (nothing should print)
