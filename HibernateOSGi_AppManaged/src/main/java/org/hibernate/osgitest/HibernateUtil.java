@@ -20,9 +20,13 @@
  */
 package org.hibernate.osgitest;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
+import org.hibernate.ejb.HibernatePersistence;
 import org.hibernate.service.ServiceRegistry;
 import org.hibernate.service.ServiceRegistryBuilder;
 
@@ -32,18 +36,34 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 public class HibernateUtil {
 
-    private static SessionFactory sessionFactory = buildSessionFactory();
+    private static SessionFactory sf;
 
-    private static SessionFactory buildSessionFactory() {
-    	Configuration configuration = new Configuration();
-        configuration.configure();
-        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
-        		.applySettings(configuration.getProperties()).buildServiceRegistry();        
-        sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-        return sessionFactory;
+    private static EntityManagerFactory emf;
+    
+    public static Session getSession() {
+    	return getSessionFactory().openSession();
     }
 
-    public static Session getSession() {
-        return sessionFactory.openSession();
+    private static SessionFactory getSessionFactory() {
+    	if (sf == null) {
+	    	Configuration configuration = new Configuration();
+	        configuration.configure();
+	        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
+	        		.applySettings(configuration.getProperties()).buildServiceRegistry();        
+	        sf = configuration.buildSessionFactory(serviceRegistry);
+    	}
+        return sf;
+    }
+    
+    public static EntityManager getEntityManager() {
+    	return getEntityManagerFactory().createEntityManager();
+    }
+
+    private static EntityManagerFactory getEntityManagerFactory() {
+    	if (emf == null) {
+    		HibernatePersistence hp = new HibernatePersistence();
+	    	emf = hp.createEntityManagerFactory( "HibernateOSGi_AppManaged", null );
+    	}
+    	return emf;
     }
 }

@@ -34,4 +34,10 @@ public interface DataPointService {
 	public List<DataPoint> getAll();
 
 	public void deleteAll();
+
+	public void addJPA(DataPoint dp);
+
+	public List<DataPoint> getAllJPA();
+
+	public void deleteAllJPA();
 }

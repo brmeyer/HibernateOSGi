@@ -26,18 +26,34 @@
   <service ref="dpService" interface="org.hibernate.osgitest.DataPointService" />
   
   <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
-        <command name="dp/add">
+        <command name="dp:add">
             <action class="org.hibernate.osgitest.command.AddCommand">
                 <property name="dpService" ref="dpService"/>
             </action>
         </command>
-        <command name="dp/getAll">
+        <command name="dp:getAll">
             <action class="org.hibernate.osgitest.command.GetAllCommand">
                 <property name="dpService" ref="dpService"/>
             </action>
         </command>
-        <command name="dp/deleteAll">
+        <command name="dp:deleteAll">
             <action class="org.hibernate.osgitest.command.DeleteAllCommand">
+                <property name="dpService" ref="dpService"/>
+            </action>
+        </command>
+        
+        <command name="dp:addJPA">
+            <action class="org.hibernate.osgitest.command.AddCommandJPA">
+                <property name="dpService" ref="dpService"/>
+            </action>
+        </command>
+        <command name="dp:getAllJPA">
+            <action class="org.hibernate.osgitest.command.GetAllCommandJPA">
+                <property name="dpService" ref="dpService"/>
+            </action>
+        </command>
+        <command name="dp:deleteAllJPA">
+            <action class="org.hibernate.osgitest.command.DeleteAllCommandJPA">
                 <property name="dpService" ref="dpService"/>
             </action>
         </command>

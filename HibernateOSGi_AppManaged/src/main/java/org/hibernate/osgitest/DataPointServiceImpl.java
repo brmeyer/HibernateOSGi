@@ -22,6 +22,8 @@ package org.hibernate.osgitest;
 
 import java.util.List;
 
+import javax.persistence.EntityManager;
+
 import org.hibernate.Session;
 import org.hibernate.osgitest.entity.DataPoint;
 
@@ -53,6 +55,31 @@ public class DataPointServiceImpl implements DataPointService {
 		s.createQuery( "delete from DataPoint" ).executeUpdate();
 		s.getTransaction().commit();
 		s.close();
+	}
+
+	public void addJPA(DataPoint dp) {
+		EntityManager em = HibernateUtil.getEntityManager();
+		em.getTransaction().begin();
+		em.persist( dp );
+		em.getTransaction().commit();
+		em.close();
+	}
+
+	public List<DataPoint> getAllJPA() {
+		EntityManager em = HibernateUtil.getEntityManager();
+		em.getTransaction().begin();
+		List list = em.createQuery( "from DataPoint" ).getResultList();
+		em.getTransaction().commit();
+		em.close();
+		return list;
+	}
+
+	public void deleteAllJPA() {
+		EntityManager em = HibernateUtil.getEntityManager();
+		em.getTransaction().begin();
+		em.createQuery( "delete from DataPoint" ).executeUpdate();
+		em.getTransaction().commit();
+		em.close();
 	}
 
 }
