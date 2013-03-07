@@ -68,6 +68,8 @@
                             org.hibernate,
                             org.hibernate.cfg,
                             org.hibernate.service,
+                            org.hibernate.proxy,
+                            javassist.util.proxy,
                             * 
 						</Import-Package>
 					</instructions>

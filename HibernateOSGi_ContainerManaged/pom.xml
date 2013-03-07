@@ -49,6 +49,8 @@
                             org.apache.felix.gogo.commands,
                             org.apache.karaf.shell.console,
                             org.apache.karaf.shell.commands,
+                            org.hibernate.proxy,
+                            javassist.util.proxy,
                             * 
 						</Import-Package>
 						<Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
