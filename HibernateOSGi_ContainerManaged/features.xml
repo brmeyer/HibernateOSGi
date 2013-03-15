@@ -43,10 +43,6 @@
 		<bundle>mvn:com.h2database/h2/1.3.170</bundle>
 		<bundle>blueprint:file:/home/bmeyer2/workspace_hibernate_master/HibernateOSGi/datasource-h2.xml</bundle>
 
-		<bundle>mvn:com.fasterxml/classmate/0.5.4</bundle>
-		<bundle>mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final</bundle>
-		<bundle>mvn:org.jboss.logging/jboss-logging/3.1.0.GA</bundle>
-
 		<!-- These do not natively support OSGi, so using 3rd party bundles. -->
 		<bundle>mvn:org.apache.servicemix.bundles/org.apache.servicemix.bundles.antlr/2.7.7_5</bundle>
 		<bundle>mvn:org.jboss.javassist/com.springsource.javassist/3.15.0.GA</bundle>
@@ -61,6 +57,15 @@
 		<bundle>mvn:javax.servlet/javax.servlet-api/3.0.1</bundle>
 		
         <bundle>wrap:mvn:org.hibernate.common/hibernate-commons-annotations/4.0.1.Final</bundle>
+        <bundle>mvn:com.fasterxml/classmate/0.5.4</bundle>
+        <bundle>mvn:org.jboss.logging/jboss-logging/3.1.0.GA</bundle>
+        
+        <!-- JACC is optional.    ORM 4.2.0.Final will make the
+        imports optional in the manifest.  But for now, 4.2.0.CR2 requires it. -->
+        <bundle>mvn:org.jboss.spec.javax.security.jacc/jboss-jacc-api_1.4_spec/1.0.2.Final</bundle>
+        
+        <!-- hibernate-validator is optional.  ORM 4.2.0.Final will make the
+        imports optional in the manifest.  But for now, 4.2.0.CR2 requires it. -->
         <bundle>wrap:mvn:javax.validation/validation-api/1.0.0.GA</bundle>
         <bundle>mvn:org.hibernate/hibernate-validator/4.2.0.Final</bundle>
 
