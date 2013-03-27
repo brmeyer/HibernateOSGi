@@ -22,13 +22,15 @@ package org.hibernate.osgitest;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.spi.PersistenceProvider;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.hibernate.ejb.HibernatePersistence;
-import org.hibernate.service.ServiceRegistry;
-import org.hibernate.service.ServiceRegistryBuilder;
+import org.osgi.framework.Bundle;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
+import org.osgi.framework.ServiceReference;
 
 /**
  * @author Brett Meyer
@@ -36,34 +38,41 @@ import org.hibernate.service.ServiceRegistryBuilder;
 
 public class HibernateUtil {
 
-    private static SessionFactory sf;
+	private static SessionFactory sf;
 
-    private static EntityManagerFactory emf;
-    
-    public static Session getSession() {
-    	return getSessionFactory().openSession();
-    }
+	private static EntityManagerFactory emf;
 
-    private static SessionFactory getSessionFactory() {
-    	if (sf == null) {
-	    	Configuration configuration = new Configuration();
-	        configuration.configure();
-	        ServiceRegistry serviceRegistry = new ServiceRegistryBuilder()
-	        		.applySettings(configuration.getProperties()).buildServiceRegistry();        
-	        sf = configuration.buildSessionFactory(serviceRegistry);
-    	}
-        return sf;
-    }
-    
-    public static EntityManager getEntityManager() {
-    	return getEntityManagerFactory().createEntityManager();
-    }
+	public static Session getSession() {
+		return getSessionFactory().openSession();
+	}
 
-    private static EntityManagerFactory getEntityManagerFactory() {
-    	if (emf == null) {
-    		HibernatePersistence hp = new HibernatePersistence();
-	    	emf = hp.createEntityManagerFactory( "HibernateOSGi_AppManaged", null );
-    	}
-    	return emf;
-    }
+	private static SessionFactory getSessionFactory() {
+		if ( sf == null ) {
+			Bundle thisBundle = FrameworkUtil.getBundle( HibernateUtil.class );
+			// Could get this by wiring up OsgiTestBundleActivator as well.
+			BundleContext context = thisBundle.getBundleContext();
+
+			ServiceReference sr = context.getServiceReference( SessionFactory.class.getName() );
+			sf = (SessionFactory) context.getService( sr );
+		}
+		return sf;
+	}
+
+	public static EntityManager getEntityManager() {
+		return getEntityManagerFactory().createEntityManager();
+	}
+
+	private static EntityManagerFactory getEntityManagerFactory() {
+		if ( emf == null ) {
+			Bundle thisBundle = FrameworkUtil.getBundle( HibernateUtil.class );
+			// Could get this by wiring up OsgiTestBundleActivator as well.
+			BundleContext context = thisBundle.getBundleContext();
+
+			ServiceReference serviceReference = context.getServiceReference( PersistenceProvider.class.getName() );
+			PersistenceProvider persistenceProvider = (PersistenceProvider) context.getService( serviceReference );
+
+			emf = persistenceProvider.createEntityManagerFactory( "HibernateOSGi_AppManaged", null );
+		}
+		return emf;
+	}
 }
