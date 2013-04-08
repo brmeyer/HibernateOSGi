@@ -8,7 +8,7 @@
         <bundle start-level="30">mvn:org.apache.geronimo.specs/geronimo-jta_1.1_spec/1.1.1</bundle>
         
         <!-- JPA -->
-        <bundle start-level="30">mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+        <bundle start-level="30">mvn:org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0-SNAPSHOT</bundle>
         
         <!-- Taken from Karaf-Tutorial -->
         <bundle>mvn:commons-collections/commons-collections/3.2.1</bundle>
@@ -41,9 +41,9 @@
         <!--<bundle>wrap:mvn:javax.validation/validation-api/1.0.0.GA</bundle>
         <bundle>mvn:org.hibernate/hibernate-validator/4.2.0.Final</bundle>-->
 
-        <bundle>mvn:org.hibernate/hibernate-core/4.2.1-SNAPSHOT</bundle>
-        <bundle>mvn:org.hibernate/hibernate-entitymanager/4.2.1-SNAPSHOT</bundle>
-        <bundle>mvn:org.hibernate/hibernate-osgi/4.2.1-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-core/4.3.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-entitymanager/4.3.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-osgi/4.3.0-SNAPSHOT</bundle>
         
         <bundle>mvn:org.hibernate/HibernateOSGi_AppManaged/1.0.0</bundle>
 	</feature>

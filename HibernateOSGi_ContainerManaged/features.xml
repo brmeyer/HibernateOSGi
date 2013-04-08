@@ -18,13 +18,12 @@
         <bundle start-level="30">mvn:org.apache.aries.transaction/org.apache.aries.transaction.manager/1.0.1</bundle>
         
         <!-- JPA -->
-        <!-- <bundle start-level="30">mvn:org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0-SNAPSHOT</bundle> -->
-        <bundle start-level="30">mvn:org.apache.geronimo.specs/geronimo-jpa_2.0_spec/1.1</bundle>
+        <bundle start-level="30">mvn:org.hibernate.javax.persistence/hibernate-jpa-2.1-api/1.0.0-SNAPSHOT</bundle>
         <bundle start-level="30">mvn:org.apache.aries/org.apache.aries.util/1.0.0</bundle>
-        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.api/1.0.0</bundle>
-        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.blueprint.aries/1.0.0</bundle>
-        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container/1.0.0</bundle>
-        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container.context/1.0.1</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.api/1.0.1-SNAPSHOT</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.blueprint.aries/1.0.2-SNAPSHOT</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container/1.0.1-SNAPSHOT</bundle>
+        <bundle start-level="30">mvn:org.apache.aries.jpa/org.apache.aries.jpa.container.context/1.0.2-SNAPSHOT</bundle>
         
 	    <!-- JNDI -->
         <bundle start-level="30">mvn:org.apache.aries.jndi/org.apache.aries.jndi.api/1.0.0</bundle>
@@ -65,8 +64,8 @@
         <!--<bundle>wrap:mvn:javax.validation/validation-api/1.0.0.GA</bundle>
         <bundle>mvn:org.hibernate/hibernate-validator/4.2.0.Final</bundle>-->
 
-        <bundle>mvn:org.hibernate/hibernate-core/4.2.1-SNAPSHOT</bundle>
-        <bundle>mvn:org.hibernate/hibernate-entitymanager/4.2.1-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-core/4.3.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-entitymanager/4.3.0-SNAPSHOT</bundle>
         
         <!-- TODO: It seems that the persistence unit bundle needs to be started
         before hibernate-osgi.  When the BundleActivator is started,
@@ -76,6 +75,6 @@
         watch for bundles with PUs before registering the persistence provider? -->
         <bundle>mvn:org.hibernate/HibernateOSGi_ContainerManaged/1.0.0</bundle>
         
-        <bundle>mvn:org.hibernate/hibernate-osgi/4.2.1-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-osgi/4.3.0-SNAPSHOT</bundle>
 	</feature>
 </features>
