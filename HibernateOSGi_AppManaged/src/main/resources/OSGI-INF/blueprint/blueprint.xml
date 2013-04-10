@@ -31,8 +31,18 @@
                 <property name="dpService" ref="dpService"/>
             </action>
         </command>
+        <command name="dp:update">
+            <action class="org.hibernate.osgitest.command.UpdateCommand">
+                <property name="dpService" ref="dpService"/>
+            </action>
+        </command>
         <command name="dp:getAll">
             <action class="org.hibernate.osgitest.command.GetAllCommand">
+                <property name="dpService" ref="dpService"/>
+            </action>
+        </command>
+        <command name="dp:getRevisions">
+            <action class="org.hibernate.osgitest.command.GetRevisionsCommand">
                 <property name="dpService" ref="dpService"/>
             </action>
         </command>

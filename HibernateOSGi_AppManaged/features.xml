@@ -43,6 +43,7 @@
 
         <bundle>mvn:org.hibernate/hibernate-core/4.3.0-SNAPSHOT</bundle>
         <bundle>mvn:org.hibernate/hibernate-entitymanager/4.3.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-envers/4.3.0-SNAPSHOT</bundle>
         <bundle>mvn:org.hibernate/hibernate-osgi/4.3.0-SNAPSHOT</bundle>
         
         <bundle>mvn:org.hibernate/HibernateOSGi_AppManaged/1.0.0</bundle>
