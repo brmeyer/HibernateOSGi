@@ -21,6 +21,7 @@
 package org.hibernate.osgitest;
 
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.osgitest.entity.DataPoint;
 
@@ -31,7 +32,13 @@ public interface DataPointService {
 
 	public void add(DataPoint dp);
 
+	public void update(DataPoint dp);
+
+	public DataPoint get(long id);
+
 	public List<DataPoint> getAll();
+
+	public Map<Number, DataPoint> getRevisions(long id);
 
 	public void deleteAll();
 

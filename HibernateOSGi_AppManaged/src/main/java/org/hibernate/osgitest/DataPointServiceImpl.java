@@ -20,11 +20,16 @@
  */
 package org.hibernate.osgitest;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.EntityManager;
 
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
 import org.hibernate.osgitest.entity.DataPoint;
 
 /**
@@ -40,6 +45,24 @@ public class DataPointServiceImpl implements DataPointService {
 		s.close();
 	}
 
+	public void update(DataPoint dp) {
+		Session s = HibernateUtil.getSession();
+		s.getTransaction().begin();
+		s.update( dp );
+		s.getTransaction().commit();
+		s.close();
+	}
+
+	public DataPoint get(long id) {
+		Session s = HibernateUtil.getSession();
+		s.getTransaction().begin();
+		DataPoint dp = (DataPoint) s.createCriteria( DataPoint.class ).add(
+				Restrictions.eq( "id", id ) ).uniqueResult();
+		s.getTransaction().commit();
+		s.close();
+		return dp;
+	}
+
 	public List<DataPoint> getAll() {
 		Session s = HibernateUtil.getSession();
 		s.getTransaction().begin();
@@ -47,6 +70,13 @@ public class DataPointServiceImpl implements DataPointService {
 		s.getTransaction().commit();
 		s.close();
 		return list;
+	}
+	
+	public Map<Number, DataPoint> getRevisions(long id) {
+		EntityManager em = HibernateUtil.getEntityManager();
+		AuditReader reader = AuditReaderFactory.get(em);
+		List<Number> revisionNums = reader.getRevisions( DataPoint.class, id );
+		return reader.findRevisions( DataPoint.class, new HashSet<Number>(revisionNums) );
 	}
 
 	public void deleteAll() {
