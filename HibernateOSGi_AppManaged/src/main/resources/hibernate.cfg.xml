@@ -20,6 +20,12 @@
 		<property name="hibernate.c3p0.timeout">300</property>
 		<property name="hibernate.c3p0.idle_test_period">3000</property>
 		<property name="hibernate.c3p0.testConnectionOnCheckout">true</property> -->
+		
+		<!-- <property name="hibernate.connection.pool_size">5</property>
+		<property name="hibernate.jdbc.batch_size">10</property>
+		<property name="hibernate.connection.provider_class">proxool</property>
+		<property name="hibernate.proxool.properties">pool-one.properties</property>
+		<property name="hibernate.proxool.pool_alias">pool-one</property> -->
     
         <mapping class="org.hibernate.osgitest.entity.DataPoint"/>
     </session-factory>
