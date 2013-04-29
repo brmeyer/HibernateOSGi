@@ -28,6 +28,8 @@
 		
 		<!-- These do not natively support OSGi, so wrap with BND. -->
 		<bundle>wrap:mvn:org.jboss/jandex/1.1.0.Alpha1</bundle>
+		<!-- Optional.  Needed to test C3P0 connection pools. -->
+		<!-- <bundle>wrap:mvn:c3p0/c3p0/0.9.1</bundle> -->
 		
         <bundle>wrap:mvn:org.hibernate.common/hibernate-commons-annotations/4.0.1.Final</bundle>
         <bundle>mvn:com.fasterxml/classmate/0.5.4</bundle>
@@ -43,6 +45,7 @@
 
         <bundle>mvn:org.hibernate/hibernate-core/4.3.0-SNAPSHOT</bundle>
         <bundle>mvn:org.hibernate/hibernate-entitymanager/4.3.0-SNAPSHOT</bundle>
+        <bundle>mvn:org.hibernate/hibernate-c3p0/4.3.0-SNAPSHOT</bundle>
         <bundle>mvn:org.hibernate/hibernate-envers/4.3.0-SNAPSHOT</bundle>
         <bundle>mvn:org.hibernate/hibernate-osgi/4.3.0-SNAPSHOT</bundle>
         
