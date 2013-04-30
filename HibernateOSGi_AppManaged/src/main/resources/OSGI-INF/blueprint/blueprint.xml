@@ -57,8 +57,18 @@
                 <property name="dpService" ref="dpService"/>
             </action>
         </command>
+        <command name="dp:updateJPA">
+            <action class="org.hibernate.osgitest.command.UpdateCommandJPA">
+                <property name="dpService" ref="dpService"/>
+            </action>
+        </command>
         <command name="dp:getAllJPA">
             <action class="org.hibernate.osgitest.command.GetAllCommandJPA">
+                <property name="dpService" ref="dpService"/>
+            </action>
+        </command>
+        <command name="dp:getRevisionsJPA">
+            <action class="org.hibernate.osgitest.command.GetRevisionsCommandJPA">
                 <property name="dpService" ref="dpService"/>
             </action>
         </command>

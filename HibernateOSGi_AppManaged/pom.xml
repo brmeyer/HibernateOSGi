@@ -30,17 +30,17 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>4.2.1-SNAPSHOT</version>
+            <version>4.2.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.2.1-SNAPSHOT</version>
+            <version>4.2.2-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-envers</artifactId>
-            <version>4.3.0-SNAPSHOT</version>
+            <version>4.2.2-SNAPSHOT</version>
         </dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
