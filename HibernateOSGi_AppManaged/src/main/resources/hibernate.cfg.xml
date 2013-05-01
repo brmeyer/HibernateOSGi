@@ -26,7 +26,20 @@
 		<property name="hibernate.connection.provider_class">proxool</property>
 		<property name="hibernate.proxool.properties">pool-one.properties</property>
 		<property name="hibernate.proxool.pool_alias">pool-one</property> -->
+		
+		<!-- <property name="hibernate.cache.region_prefix">hibernate.test</property>
+		<property name="cache.use_query_cache">true</property>
+        <property name="cache.use_second_level_cache">true</property>
+        <property name="cache.use_structured_entries">true</property>
+        <property name="cache.region.factory_class">org.hibernate.cache.EhCacheRegionFactory</property>
+        <property name="net.sf.ehcache.configurationResourceName">file:///home/bmeyer2/workspace_hibernate_master/HibernateOSGi/HibernateOSGi_AppManaged/src/main/resources/ehcache.xml</property> -->
     
+        <!-- <property name="hibernate.cache.region_prefix">hibernate.test</property>
+		<property name="cache.use_query_cache">true</property>
+        <property name="cache.use_second_level_cache">true</property>
+        <property name="cache.use_structured_entries">true</property>
+        <property name="cache.region.factory_class">org.hibernate.cache.infinispan.InfinispanRegionFactory</property> -->
+        
         <mapping class="org.hibernate.osgitest.entity.DataPoint"/>
     </session-factory>
  
