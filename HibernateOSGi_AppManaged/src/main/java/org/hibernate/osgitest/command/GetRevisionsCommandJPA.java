@@ -25,8 +25,8 @@ import org.apache.felix.service.command.CommandSession;
 import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.osgitest.DataPointService;
 
-@Command(scope = "dp", name = "getRevisions")
-public class GetRevisionsCommand implements Action {
+@Command(scope = "dp", name = "getRevisionsJPA")
+public class GetRevisionsCommandJPA implements Action {
 	@Argument(index=0, name="Id", required=true, description="Id", multiValued=false)
     String id;
 	
@@ -37,7 +37,7 @@ public class GetRevisionsCommand implements Action {
     }
 
     public Object execute(CommandSession session) throws Exception {
-    	Map<Number, DefaultRevisionEntity> revisions = dpService.getRevisions(Long.valueOf( id ));
+    	Map<Number, DefaultRevisionEntity> revisions = dpService.getRevisionsJPA(Long.valueOf( id ));
         for (Number revisionNum : revisions.keySet()) {
         	DefaultRevisionEntity dre = revisions.get( revisionNum );
             System.out.println(revisionNum + ": " + dre.getId() + ", " + dre.getTimestamp());

@@ -16,20 +16,21 @@
  */
 package org.hibernate.osgitest.command;
 
-import java.util.Map;
-
 import org.apache.felix.gogo.commands.Action;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.felix.service.command.CommandSession;
-import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.osgitest.DataPointService;
+import org.hibernate.osgitest.entity.DataPoint;
 
-@Command(scope = "dp", name = "getRevisions")
-public class GetRevisionsCommand implements Action {
-	@Argument(index=0, name="Id", required=true, description="Id", multiValued=false)
+@Command(scope = "dp", name = "updateJPA")
+public class UpdateCommandJPA implements Action {
+    @Argument(index=0, name="Id", required=true, description="Id", multiValued=false)
     String id;
-	
+    
+    @Argument(index=1, name="Name", required=true, description="Name", multiValued=false)
+    String name;
+    
     private DataPointService dpService;
     
     public void setDpService(DataPointService dpService) {
@@ -37,11 +38,9 @@ public class GetRevisionsCommand implements Action {
     }
 
     public Object execute(CommandSession session) throws Exception {
-    	Map<Number, DefaultRevisionEntity> revisions = dpService.getRevisions(Long.valueOf( id ));
-        for (Number revisionNum : revisions.keySet()) {
-        	DefaultRevisionEntity dre = revisions.get( revisionNum );
-            System.out.println(revisionNum + ": " + dre.getId() + ", " + dre.getTimestamp());
-        }
+        DataPoint dp = dpService.getJPA( Long.valueOf( id ) );
+        dp.setName( name );
+        dpService.updateJPA( dp );
         return null;
     }
 

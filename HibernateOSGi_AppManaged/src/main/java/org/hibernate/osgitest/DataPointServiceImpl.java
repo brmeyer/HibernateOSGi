@@ -30,6 +30,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.envers.AuditReader;
 import org.hibernate.envers.AuditReaderFactory;
+import org.hibernate.envers.DefaultRevisionEntity;
 import org.hibernate.osgitest.entity.DataPoint;
 
 /**
@@ -72,11 +73,11 @@ public class DataPointServiceImpl implements DataPointService {
 		return list;
 	}
 	
-	public Map<Number, DataPoint> getRevisions(long id) {
-		EntityManager em = HibernateUtil.getEntityManager();
-		AuditReader reader = AuditReaderFactory.get(em);
+	public Map<Number, DefaultRevisionEntity> getRevisions(long id) {
+		Session s = HibernateUtil.getSession();
+		AuditReader reader = AuditReaderFactory.get(s);
 		List<Number> revisionNums = reader.getRevisions( DataPoint.class, id );
-		return reader.findRevisions( DataPoint.class, new HashSet<Number>(revisionNums) );
+		return reader.findRevisions( DefaultRevisionEntity.class, new HashSet<Number>(revisionNums) );
 	}
 
 	public void deleteAll() {
@@ -95,6 +96,23 @@ public class DataPointServiceImpl implements DataPointService {
 		em.close();
 	}
 
+	public void updateJPA(DataPoint dp) {
+		EntityManager em = HibernateUtil.getEntityManager();
+		em.getTransaction().begin();
+		em.merge( dp );
+		em.getTransaction().commit();
+		em.close();
+	}
+
+	public DataPoint getJPA(long id) {
+		EntityManager em = HibernateUtil.getEntityManager();
+		em.getTransaction().begin();
+		DataPoint dp = (DataPoint) em.createQuery( "from DataPoint dp where dp.id=" + id ).getSingleResult();
+		em.getTransaction().commit();
+		em.close();
+		return dp;
+	}
+
 	public List<DataPoint> getAllJPA() {
 		EntityManager em = HibernateUtil.getEntityManager();
 		em.getTransaction().begin();
@@ -102,6 +120,13 @@ public class DataPointServiceImpl implements DataPointService {
 		em.getTransaction().commit();
 		em.close();
 		return list;
+	}
+	
+	public Map<Number, DefaultRevisionEntity> getRevisionsJPA(long id) {
+		EntityManager em = HibernateUtil.getEntityManager();
+		AuditReader reader = AuditReaderFactory.get(em);
+		List<Number> revisionNums = reader.getRevisions( DataPoint.class, id );
+		return reader.findRevisions( DefaultRevisionEntity.class, new HashSet<Number>(revisionNums) );
 	}
 
 	public void deleteAllJPA() {
