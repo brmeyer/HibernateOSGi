@@ -1,6 +1,8 @@
 HibernateOSGi
 =============
 
+*OUT OF DATE!  These examples are now maintained @ https://github.com/hibernate/hibernate-demos/tree/master/hibernate-orm/osgi!*
+
 This repository provides example client bundles for using Hibernate ORM in an OSGi environment.  There is currently only one example, but more are in the works.  All examples assume Apache Karaf is the runtime, however each should be able to be molded for alternative environments.
 
 H2
